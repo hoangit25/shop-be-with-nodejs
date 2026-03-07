@@ -1,9 +1,13 @@
 const productsAdmin = require("../../controller/admin/products.admin.controller");
 const validate = require("../../validates/products-validate")
+const multer = require("multer");
 const express = require("express");
 const storageMulter = require('../../helper/storageMulter');
-const upload = storageMulter();
+const upload = multer();
 const router = express.Router();
+
+const uploadCloud = require('../../middleware/admin/uploadCloud.middleware');
+// 
 
     router.get("/", productsAdmin.productsAdmin);
 
@@ -23,7 +27,9 @@ const router = express.Router();
     
     router.get('/create',productsAdmin.createProduct);
 
-    router.post('/create',upload.single('thumbnail'),
+    router.post('/create',
+        upload.single('thumbnail'),
+        uploadCloud.uploadCloud,
         validate.createPost,
         productsAdmin.createPost)
 
