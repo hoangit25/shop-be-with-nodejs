@@ -1,0 +1,133 @@
+extends ../../layout/default.pug
+include ../../mixins/alert.pug
+
+block main
+    h1 Chỉnh sửa sản phẩm
+    form(
+        action=`${prefixAdmin}/products/edit/${product.id}?_method=PATCH`
+        method="POST"
+        id="form-edit-product"
+        enctype="multipart/form-data"
+        )
+        div(class="form-group")
+            label(for="title") Tiêu đề 
+            input(
+                value=product.title
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+            )
+
+        div(class="form-group")
+            label(for="desc") Mô tả
+            textarea(
+                
+                class="form-control"
+                id="desc"
+                name="description"
+                rows="5"
+            ) #{product.description}
+        div(class="form-group")
+            label(for="price") Giá
+            input(
+                value=product.price
+                type="number"
+                class="form-control"
+                id="price"
+                name="price"
+                min="0"
+            )
+
+        div(class="form-group")
+            label(for="discount") % Giảm giá
+            input(
+                value=product.discount
+                type="number"
+                class="form-control"
+                id="discount"
+                name="discountPercentage"
+                min="0"
+            )
+        div(class="form-group")
+            label(for="stock") Số lượng
+            input(
+                value=product.stock 
+                type="number"
+                class="form-control"
+                id="stock"
+                name="stock"
+                min="0"
+            )
+
+        div(class="form-group" upload-image)
+            label(for="thumbnail") Ảnh
+            .d-flex.align-items-start
+                .mr-3
+                    input(
+                        
+                        type="file"
+                        class="form-control-file"
+                        id="thumbnail"
+                        name="thumbnail"
+                        accept="image/*"
+                        upload-image-input
+                    )
+                    small.form-text.text-muted Chọn ảnh để xem trước
+                div(upload-image-preview-wrapper)
+                    span.text-muted.small(
+                        upload-image-placeholder
+                        ) Chưa chọn ảnh
+                    img(
+                        src=product.thumbnail
+                        alt="ảnh sản phẩm"
+                        upload-image-preview
+                    )
+                    button(
+                        type="button"
+                        class="btn btn-sm btn-danger"
+                        aria-label="Xóa ảnh"
+                        upload-image-button
+                    ) ×
+        div(class="form-group") 
+            label(for="") Vị trí 
+            input(
+                
+                type="number"
+                class="form-control"
+                id="position"
+                name="position"
+                placeholder="Tự động tăng"
+                min="1"
+            )
+
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusActive"
+                name="status"
+                value="active"
+                checked = product.status === 'active'? true : false
+            )
+            label(for="statusActive" class="form-check-label") Hoạt động
+
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusInActive"
+                name="status"
+                value="inactive"
+                checked = product.status === 'inactive'? true : false
+            )
+            label(for="statusActive" class="form-check-label") Dừng hoạt động
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Chỉnh sửa
+
+    // Load JS dùng chung cho thông báo và thao tác sản phẩm
+    script(src="/admin/js/showImageEdit.js")

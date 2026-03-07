@@ -1,0 +1,30 @@
+mixin alert-success(time)
+    - if (messages.changeStatusSuccess)
+        .message.infor
+          div(
+            class="alert alert-success"
+            show-alert
+            data-time=time) #{messages.changeStatusSuccess} <button close-alert>X</button> 
+mixin create-success(timecreate)
+    - if (messages.successCreateProduct)
+        .message.infor
+          div(
+            class="alert alert-success"
+            show-alert
+            data-time=timecreate) #{messages.successCreateProduct} <button close-alert>X</button> 
+
+mixin error-create(timeerr) 
+    - if (messages.createProductError)
+      .message.infor
+        div(
+          class="alert alert-danger"
+          show-alert
+          data-time=timeerr) #{messages.createProductError} <button close-alert>X</button> 
+
+mixin validate-title-create-product(time)
+    - if (messages.err)
+      .message.infor
+        div(
+          class="alert alert-danger"
+          show-alert
+          data-time=time) #{messages.err} <button close-alert>X</button> 

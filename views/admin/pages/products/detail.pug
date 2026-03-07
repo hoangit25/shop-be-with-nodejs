@@ -1,0 +1,17 @@
+extends ../../layout/default.pug 
+
+block main 
+    -if(product.title)
+        h1 #{product.title}
+    .card.mb-3
+        .card-header Thông tin sản phẩm
+        .card-body
+            .row
+                .col-4
+                    img(src=product.imageUrl alt=product.title class="img-fluid")
+                    p Giá: #{product.price} VNĐ
+                .col-8
+                    p Mô tả: #{product.description}
+                    
+                    span Trạng thái: 
+                    span.badge(class="badge." + (product.status == 'active' ? 'bg-success' : 'bg-secondary')) #{product.status == 'active' ? 'Hoạt động' : 'Không hoạt động'}
