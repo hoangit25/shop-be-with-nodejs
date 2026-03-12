@@ -54,3 +54,23 @@ if(btnPage){
     })
 }
 
+//params sort product in [GET]admin/products
+const sortProsuct = document.querySelector('[sort]')
+
+if(sortProsuct){
+    const formSort = document.querySelector('[sort-select]');  
+    if(formSort){
+        console.log(formSort)
+        const url =new URL(window.location.href);
+        formSort.addEventListener('change',(e)=>{
+            e.preventDefault();
+            const valueSort = e.target.value.split('-');
+            let [sort,value]=valueSort;
+            url.searchParams.set('sortKey',sort);
+            url.searchParams.set('sortValue',value);
+
+            window.location.href=url.href;
+        })
+        
+    }  
+}

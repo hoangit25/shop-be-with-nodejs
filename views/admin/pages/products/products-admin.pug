@@ -8,7 +8,25 @@ block main
   +alert-success(5000)
 
   h1 Danh sách sản phẩm
-
+  .card.mb-3
+    .card-header Sắp xếp
+    .card-body
+      .row 
+          .col-6
+            div(sort)
+              select(
+              class ="form control"
+              name="sort"
+              sort-select)
+                option(disabled selected) --Chọn sắp xếp--
+                option(value="price-desc") Giá giảm dần
+                option(value="price-asc") Giá tăng dần
+                option(value="position-desc") Vị trí giảm dần
+                option(value="position-asc") Vị trí tăng dần
+              button(
+                class="btn btn-outline-danger btn-sm ml-2"
+                clear-sort
+              ) clear
   .card.mb-3
     .card-header Bộ lọc và Tìm kiếm
     .card-body 

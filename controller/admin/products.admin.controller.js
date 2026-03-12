@@ -17,6 +17,17 @@ module.exports.productsAdmin = async (req, res) => {
     let find = {
         deleted: false
     }
+    //object render sort 
+    let sort={
+
+    }
+    if (req.query.sortKey && req.query.sortValue) {
+        console.log(req.query);
+        sort[req.query.sortKey]=req.query.sortValue;
+    }else{
+        sort.position ='asc';
+    }
+
 
     //pagination
 
@@ -39,7 +50,7 @@ module.exports.productsAdmin = async (req, res) => {
     if (req.query.status) {
         find.status = req.query.status;
     }
-    const Products = await products.find(find).limit(pagePagination.limits).skip(pagePagination.pagination);
+    const Products = await products.find(find).limit(pagePagination.limits).skip(pagePagination.pagination).sort(sort);
     res.render('admin/pages/products/products-admin.pug', {
         titlePage: "Trang sản phẩm Ad",
         products: Products,
@@ -89,7 +100,7 @@ module.exports.changeMulti = async (req, res) => {
     }
     res.redirect(req.get('referer'));
 }
-//[GET] /admin/products/recyclecycle
+//[GET] /admin/products/recycle
 module.exports.recycleProductPage = async (req, res) => {
         const find = {
             deleted: true

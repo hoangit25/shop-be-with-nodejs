@@ -37,7 +37,9 @@ const uploadCloud = require('../../middleware/admin/uploadCloud.middleware');
 
     router.get('/edit/:id',productsAdmin.getEditProduct);
 
-    router.patch('/edit/:id',upload.single('thumbnail'),
+    router.patch('/edit/:id',
+        upload.single('thumbnail'),
+         uploadCloud.uploadCloud,
         validate.editPost,
         productsAdmin.editProduct)
 
