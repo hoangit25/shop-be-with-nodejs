@@ -1,4 +1,5 @@
 const express = require("express");
+var path = require('path');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const  session = require('express-session')
@@ -20,6 +21,8 @@ app.set("view engine", "pug");
 
 //
 app.use ( bodyParser.urlencoded ({ extended: false }) );
+// app use tinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
